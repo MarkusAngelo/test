@@ -1,0 +1,407 @@
+<nav class="navbar navbar-expand-lg bg-white fixed-top mynav pb-0 pt-0">
+  <div class="container-fluid">
+    <a class="navbar-brand align-self-baseline" href="#"
+      ><i class="fa-solid fa-bars me-3"></i>Jira Software</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark">
+        <li class="nav-item">
+          <a
+            class="nav-link text-dark content-hover"
+            routerLink="/board"
+            role="button"
+            aria-expanded="false"
+          >
+            Board
+          </a>
+        </li>
+        <li ngbDropdown class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-dark content-hover"
+            role="button"
+            ngbDropdownToggle
+            id="navbarDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Projects
+          </a>
+          <ul
+            ngbDropdownMenu
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+          >
+            <li *ngFor="let x of projectList" (click)="setProject(x)">
+              <a ngbDropdownItem class="dropdown-item">{{ x.title }}</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                ngbDropdownItem
+                class="dropdown-item"
+                role="button"
+                data-bs-toggle="modal"
+                data-bs-target="#projectModal"
+                >Create Project</a
+              >
+            </li>
+            <li>
+              <a ngbDropdownItem class="dropdown-item" routerLink="/projects"
+                >View All Projects</a
+              >
+            </li>
+          </ul>
+        </li>
+        <!-- <li ngbDropdown class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-dark content-hover"
+            href="#"
+            role="button"
+            ngbDropdownToggle
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Filters
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-dark content-hover"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dashboard
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-dark content-hover"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Teams
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-dark content-hover"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Apps
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page">
+            <button
+              class="btn bg-primary p-0 px-1 text-white"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Create
+            </button></a
+          >
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle text-dark content-hover"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              user
+            </a>
+            <ul class="dropdown-menu logUser">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Logo</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Log-Off</a></li>
+            </ul>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid pt-5">
+  <router-outlet></router-outlet>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header d-flex">
+        <div>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Create Issue</h1>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="ticketForm">
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <div class="project-model">
+                  <label for=""
+                    >Project <span class="text-danger">*</span></label
+                  >
+                  <select
+                    name="ticketObj"
+                    id=""
+                    class="form-select mb-3"
+                    formControlName="projectId"
+                  >
+                    <option class="text-muted" selected disabled>Select</option>
+                    <option *ngFor="let x of projectList" [value]="x.id">
+                      {{ x.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for=""
+                  >Issue Type<span class="text-danger">*</span></label
+                >
+                <select name="" class="form-select" formControlName="issueType">
+                  <option class="text-muted" selected disabled>Select</option>
+                  <option *ngFor="let type of issueType" [value]="type">
+                    {{ type }}
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-4">
+              <label for=""
+                >Status <span><i class="fa fa-circle-info"></i></span
+              ></label>
+              <select name="" class="mb-1 form-select">
+                <option>ZB1</option>
+              </select>
+            </div> -->
+              <div class="col-12 mb-3">
+                <label for="">Summary <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  name="summary"
+                  class="form-control border inputbg border-2"
+                  formControlName="summary"
+                />
+              </div>
+              <div class="col-12 mb-3">
+                <label for="">Description</label>
+                <textarea
+                  name="description"
+                  cols="30"
+                  rows="5"
+                  class="form-control"
+                  formControlName="description"
+                ></textarea>
+              </div>
+
+              <div class="col-6 mb-3">
+                <label for="">Reporter</label>
+                <select
+                  name="createdBy"
+                  class="mb-1 form-select"
+                  formControlName="createdBy"
+                >
+                  <option selected disabled>Select</option>
+                  <option *ngFor="let y of userList" [value]="y.id">
+                    {{ y.name }}
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-12 mb-3">
+              <label for="">Attachment</label>
+              <div class="border border-dotted text-center p-5">
+                <span
+                  ><i class="fa fa-cloud-arrow-up"></i>Drop files to attach or
+                  <a href="#" class="text-decoration-none">
+                    <label class="custom-file-upload">
+                      <input type="file" />
+                      <i class="fa fa-cloud-arrow-up"></i>
+                      browse
+                    </label>
+                  </a></span
+                >
+              </div>
+            </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <div>
+            <input type="checkbox" name="" id="" /><span>
+              Create another issue</span
+            >
+          </div>
+          <div>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="projectModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Project</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <form [formGroup]="createForm" (ngSubmit)="onProjectSubmit()">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <label for="">Project Title</label>
+              <input
+                type="text"
+                name="title"
+                (input)="keyGenerator($event)"
+                formControlName="title"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-6">
+              <label for="">Key</label>
+              <input
+                ngbTooltip="Make It Descriptive"
+                type="text"
+                name="key"
+                formControlName="key"
+                class="form-control"
+                data-toggle="tooltip"
+                data-placement="top"
+                maxlength="10"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Start Date</label>
+              <input
+                type="date"
+                name="startDate"
+                formControlName="startDate"
+                class="form-control"
+                (change)="onStartDateChange($event, 'startDate')"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">End Date</label>
+              <input
+                type="date"
+                name="endDate"
+                formControlName="endDate"
+                class="form-control"
+                (change)="onStartDateChange($event, 'endDate')"
+              />
+            </div>
+          </div>
+          <div class="row-12">
+            <label for="">Project Goal</label>
+            <input
+              type="text"
+              name="goal"
+              class="form-control form-control-lg"
+              formControlName="goal"
+            />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-3 mt-3" *ngFor="let project of projectList">
+    <div class="card">
+      <div class="card-header bg-success text-center">
+        <button class="btn btn-dark btn-sm" (click)="setProject(project)">
+          {{ project.key }}
+        </button>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <h6 class="text-center">{{ project.title }}</h6>
+          <hr />
+          <div class="col-6">
+            {{ project.startDate | date : "dd-MMM-yy" }}
+          </div>
+          <div class="col-6">
+            {{ project.endDate | date : "dd-MMM-yy" }}
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          {{ project.goal }}
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-primary btn-sm">Edit</button>
+          </div>
+          <div class="col-6">
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="removeProject(project.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
